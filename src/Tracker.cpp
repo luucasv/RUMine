@@ -1,4 +1,6 @@
 #include "../include/Tracker.h"
+#include "../include/stats.h"
+#include "../include/utils.h"
 
 #include <opencv2/features2d.hpp>
 #include <opencv2/videoio.hpp>
@@ -7,16 +9,9 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-#include "stats.h"
-#include "utils.h"
 
-using cv::Mat;
-using cv::Point2f;
-using cv::Point;
-using cv::String;
-using std::string;
-using std::stringstream;
-using std::vector;
+using namespace cv;
+using namespace std;
 
 void Tracker::setFirstFrame(const Mat frame, vector<Point2f> bb, Stats& stats) {
   cv::Point *ptMask = new cv::Point[bb.size()];
@@ -65,10 +60,10 @@ Mat Tracker::process(const Mat frame, Stats& stats) {
 
   if(matched1.size() < 4 || homography.empty()) {
       Mat res;
-      hconcat(first_frame, frame, res);
+      //hconcat(first_frame, frame, res);
       stats.inliers = 0;
       stats.ratio = 0;
-      return res;
+      return frame;
   }
 
   for(unsigned i = 0; i < matched1.size(); i++) {

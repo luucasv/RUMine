@@ -5,17 +5,12 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-#include "stats.h"
-#include "utils.h"
+#include "../include/Tracker.h"
+#include "../include/stats.h"
+#include "../include/utils.h"
 
-using namespace std;
 using namespace cv;
-
-const double akaze_thresh = 3e-4;
-const double ransac_thresh = 2.5f;
-const double nn_match_ratio = 0.8f;
-const int bb_min_inliers = 100;
-const int stats_update_period = 10;
+using namespace std;
 
 int main() {
     string input_path = "blais.mp4";
@@ -25,7 +20,7 @@ int main() {
     cout << "Input :: (0) Camera | (1) Video: ";
     scanf("%d", &isCamera);
     if (!isCamera) {
-        int camera_no = input_path[0] - '0';
+        int camera_no = 0;
             video_in.open( camera_no );
     }
 
@@ -43,14 +38,18 @@ int main() {
     akaze->setThreshold(akaze_thresh);
 
     Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("BruteForce-Hamming");
-    marker_tracker::Tracker akaze_tracker(akaze, matcher);
+    Tracker akaze_tracker(akaze, matcher);
 
     Mat frame;
     namedWindow(video_name, WINDOW_NORMAL);
     cout << "\nSelect ROI to track" << endl;
 
-    video_in >> frame;
-    video_in >> frame;
+    while(waitKey(1) != 'c') {
+        video_in >> frame;
+        cv::resizeWindow(video_name, frame.size());
+        imshow(video_name, frame);
+    }   
+    
     cv::resizeWindow(video_name, frame.size());
     imshow(video_name, frame);
     vector<Point2f> bb;

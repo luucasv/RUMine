@@ -8,6 +8,12 @@
 #include "stats.h"
 #include "utils.h"
 
+const double akaze_thresh = 3e-4;
+const double ransac_thresh = 2.5f;
+const double nn_match_ratio = 0.8f;
+const int bb_min_inliers = 100;
+const int stats_update_period = 10;
+
 class Tracker {
   public:
     Tracker(cv::Ptr<cv::Feature2D> _detector, cv::Ptr<cv::DescriptorMatcher> _matcher) :

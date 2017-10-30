@@ -1,19 +1,19 @@
 #include "../include/utils.h"
+#include "../include/stats.h"
 
 #include <opencv2/core.hpp>
+#include <opencv2/features2d.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui.hpp>
+
 #include <vector>
 #include <string>
 #include <sstream>
 
-#include "stats.h"
 
-using cv::Mat;
-using cv::Point2f;
-using cv::Point;
-using cv::String;
-using std::string;
-using std::stringstream;
-using std::vector;
+using namespace std;
+using namespace cv;
 
 void drawBoundingBox(Mat image, vector<Point2f> bb) {
     for(unsigned i = 0; i < bb.size() - 1; i++) {

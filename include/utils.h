@@ -4,8 +4,7 @@
 #include <opencv2/core.hpp>
 #include <vector>
 #include <string>
-#include "stats.h"
-
+#include "../include/stats.h"
 
 void drawBoundingBox(cv::Mat image, std::vector<cv::Point2f> bb);
 void drawStatistics(cv::Mat image, const Stats& stats);
