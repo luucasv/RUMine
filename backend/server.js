@@ -7,11 +7,11 @@ import indexRouter from './routes/index';
 import userRouter from './routes/user';
 
 // config
-import { secret, database } from './config'
+import { secret_string, database_link } from './config'
 const PORT = process.env.PORT || 3000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(database, { useMongoClient: true });
+mongoose.connect(database_link, { useMongoClient: true });
 
 const app = express();
 

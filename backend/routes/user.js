@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getBalance } from '../controllers/user';
+import { createUser, getBalance, changeBalance } from '../controllers/user';
 import { authenticate, validateToken } from '../controllers/auth';
 
 const userRouter = express.Router();
@@ -27,7 +27,6 @@ userRouter.post('/auth', async (req, res) => {
 });
 
 // midleware to authenticate and check if token is ok
-
 userRouter.use(async (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
   let ans = await validateToken(token);
@@ -39,8 +38,14 @@ userRouter.use(async (req, res, next) => {
   }
 });
 
+// get user balance
 userRouter.get('/balance', async (req, res) => {
   res.json({success: true, balace: await getBalance(req.decode.username)});
-})
+});
+
+// update balence
+userRouter.post('/balance', async (req, res) => {
+  res.json(await changeBalance(req.decode.username, req.body.amount));
+});
 
 export default userRouter;

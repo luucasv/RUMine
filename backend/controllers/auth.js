@@ -1,5 +1,5 @@
 import { checkPassword } from './user';
-import { secret } from '../config';
+import { secret_string } from '../config';
 import jwt from 'jsonwebtoken';
 
 export const authenticate = async (username, password) => {
@@ -25,14 +25,14 @@ export const authenticate = async (username, password) => {
 }
 
 export const genToken = async (data) => {
-  return jwt.sign(data, secret, { expiresIn: '1h' });
+  return jwt.sign(data, secret_string, { expiresIn: '1h' });
 };
 
 export const validateToken = async (token) => {
   if (token) {
     let decode;
     try{
-      decode = jwt.verify(token, secret);
+      decode = jwt.verify(token, secret_string);
     } catch(err) {
       if (err.name == 'TokenExpiredError') {
         return {success: false, msg: 'Token Expired!'};

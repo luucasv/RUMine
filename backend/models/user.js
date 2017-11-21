@@ -22,7 +22,7 @@ export const UserSchema = new Schema({
     type: String
   },
   balance: {
-    required: true,
+    default: 0.0,
     type: Number
   }
 });

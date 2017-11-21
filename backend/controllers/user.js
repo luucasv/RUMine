@@ -48,3 +48,19 @@ export const getBalance = async (username) => {
   let user = await findUserByUsername(username);
   return user.balance;
 }
+
+export const changeBalance = async (username, amount) => {
+  if (!amount) {
+    return { succes: false, msg: 'No amount provided.' };
+  }
+  let user = await User.findOneAndUpdate({
+    username: username,
+    balance: { $gte: -amount }
+  },
+  {
+    $inc: { balance: amount }
+  }).exec();
+  if (user) {
+    return { succes: true, msg: 'Account balance updated!', newBalance: user.balance };
+  }
+}
