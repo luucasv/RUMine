@@ -9,12 +9,14 @@
 The config.js file will contain some secret values needed to create the server.
 It needs:
  - **secret_string**: A secret random string used to encrypt data
- - **database_link**: link to the databese.
+ - **database_link**: Link to the databese.
+ - **database_password**: Password to access restricted routes 
 
 Example: 
 ```js
 export const secret_string = 'my little secret';
 export const database_link = 'mongodb://localhost/RUMine';
+export const database_password = 'my pass';
 ```
 
 This example is on config_example.js, you can rename it and use for tests.

@@ -23,16 +23,20 @@ export const createUser = async (user) => {
   });
 
   if (await exists({username: new_user.username})) {
-    return { succes: false, msg: 'Username already exist!' };
+    return { success: false, msg: 'Username already exist!' };
   } else if (await exists({ email: new_user.email })) {
-    return { succes: false, msg: 'Email already exist!' };
+    return { success: false, msg: 'Email already exist!' };
   } else if (await exists({ cpf: new_user.cpf })) {
-    return { succes: false, msg: 'Cpf already exist!' };    
+    return { success: false, msg: 'Cpf already exist!' };    
   }
 
-  await new_user.save();
+  let res = await new_user.save().then(() => {
+    return { success: true };
+  }).catch((err) => {
+    return { success: false, msg: err };
+  });
 
-  return { success: true };
+  return res;
 }
 
 export const checkPassword = async (username, password) => {
@@ -51,7 +55,7 @@ export const getBalance = async (username) => {
 
 export const changeBalance = async (username, amount) => {
   if (!amount) {
-    return { succes: false, msg: 'No amount provided.' };
+    return { success: false, msg: 'No amount provided.' };
   }
   let user = await User.findOneAndUpdate({
     username: username,
@@ -60,7 +64,10 @@ export const changeBalance = async (username, amount) => {
   {
     $inc: { balance: amount }
   }).exec();
+  // TODO(lvcs): test this
   if (user) {
-    return { succes: true, msg: 'Account balance updated!', newBalance: user.balance };
+    return { success: true, msg: 'Account balance updated!', newBalance: eval(user.balance + amount) };
+  } else {
+    return { success: false, msg: 'Insufficient balance.' };
   }
 }

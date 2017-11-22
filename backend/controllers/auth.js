@@ -3,12 +3,6 @@ import { secret_string } from '../config';
 import jwt from 'jsonwebtoken';
 
 export const authenticate = async (username, password) => {
-  if (!username || !password) {
-    return {
-      success: false,
-      msg: 'Missing username or password'
-    };
-  }
   let success = await checkPassword(username, password);
   if (success) {
     return {
@@ -29,19 +23,15 @@ export const genToken = async (data) => {
 };
 
 export const validateToken = async (token) => {
-  if (token) {
-    let decode;
-    try{
-      decode = jwt.verify(token, secret_string);
-    } catch(err) {
-      if (err.name == 'TokenExpiredError') {
-        return {success: false, msg: 'Token Expired!'};
-      } else {
-        return {success: false, msg: 'Invalid Token!'};
-      }
+  let decode;
+  try{
+    decode = jwt.verify(token, secret_string);
+  } catch(err) {
+    if (err.name == 'TokenExpiredError') {
+      return {success: false, msg: 'Token Expired!'};
+    } else {
+      return {success: false, msg: 'Invalid Token!'};
     }
-    return {success: true, decode: decode};
-  } else {
-    return { success: false, msg: 'No Token provided.'};
   }
+  return {success: true, decode: decode};
 }

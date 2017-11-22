@@ -9,6 +9,12 @@ const userRouter = express.Router();
 // register user
 userRouter.post('/register', async (req, res) => {
   const {username, password, email, cpf} = req.body;
+  if (!username || !password || !email || !cpf) {
+    return res.json({ 
+      success: false,
+      msg: 'Missing something'
+    });
+  }
   let user = {
     username: username,
     password: password,
@@ -22,13 +28,25 @@ userRouter.post('/register', async (req, res) => {
 // get token
 userRouter.post('/auth', async (req, res) => {
   const {username, password} = req.body;
+  if (!username || !password) {
+    return res.json({
+      success: false,
+      msg: 'Missing username or password'
+    });
+  }
   let ans = await authenticate(username, password);
   return res.json(ans);
 });
 
-// midleware to authenticate and check if token is ok
+// middleware to authenticate and check if token is ok
 userRouter.use(async (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (!token) {
+    return res.json({
+      success: false,
+      msg: 'No Token provided.'
+    });
+  }
   let ans = await validateToken(token);
   if (!ans.success) {
     return res.status(401).json(ans);
@@ -40,11 +58,11 @@ userRouter.use(async (req, res, next) => {
 
 // get user balance
 userRouter.get('/balance', async (req, res) => {
-  res.json({success: true, balace: await getBalance(req.decode.username)});
+  res.json({success: true, balance: await getBalance(req.decode.username)});
 });
 
-// update balence
-userRouter.post('/balance', async (req, res) => {
+// update balance
+userRouter.put('/balance', async (req, res) => {
   res.json(await changeBalance(req.decode.username, req.body.amount));
 });
 

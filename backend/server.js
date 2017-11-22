@@ -5,6 +5,7 @@ import bodyparser from 'body-parser';
 // routers
 import indexRouter from './routes/index';
 import userRouter from './routes/user';
+import queueRouter from "./routes/queue_size";
 
 // config
 import { secret_string, database_link } from './config'
@@ -21,6 +22,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 // setting routers
 app.use('/', indexRouter);
 app.use('/users', userRouter);
+app.use('/queue_size', queueRouter);
 
 const server = app.listen(PORT, () => {
   const { address, port } = server.address();
