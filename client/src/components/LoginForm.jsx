@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AuthProvider from '../lib/AuthProvider';
+import Colors from 'material-ui/styles/colors'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -55,10 +56,11 @@ class LoginForm extends Component {
             onChange={this.handlePasswordChange.bind(this)}
           />
           <br />
+
           <div>
-            <RaisedButton label={'Entrar'} onClick={this.handleLogin.bind(this)}/>
+            <RaisedButton ra label={'Primary'} primary={true} label={'Entrar'} style={style} onClick={this.handleLogin.bind(this)}/>
             <Link to='/register'>
-              <RaisedButton label={'Cadastre-se'} />
+              <RaisedButton label={'Cadastre-se'} style={style} />
             </Link>
           </div>
         </Form>
@@ -66,8 +68,6 @@ class LoginForm extends Component {
     );
   }
 }
-
-export default LoginForm;
 
 const Form = styled.form`
     width: 100%;
@@ -77,3 +77,10 @@ const Form = styled.form`
     justify-content: center;
     flex-flow: column;
 `;
+
+const style = {
+  margin: 8
+
+};
+
+export default LoginForm;
