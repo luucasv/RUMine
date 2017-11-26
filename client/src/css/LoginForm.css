@@ -1,0 +1,19 @@
+div.logo-img {
+    display:block;
+    content:url('../img/applogo.png');
+    margin:auto;
+    margin-top: 35%;
+    width: 50%;
+    height: auto;
+}
+
+div.whole-page {
+    position: absolute; top: 0; left: 0; height: 100%; width: 100%;
+    background-image: url('../img/blurredRU.png');
+    background-size: cover;
+    background-repeat:no-repeat;
+}
+
+div.buttonRow {
+    margin-top:5%;
+}
