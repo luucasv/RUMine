@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Colors from 'material-ui/styles/colors'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AuthProvider from '../lib/AuthProvider';
-import {orange400, orange700} from 'material-ui/styles/colors'
-import '../css/LoginForm.css'
+import {orange400, orange700} from 'material-ui/styles/colors';
+import '../css/LoginForm.css';
 
 const buttonTheme = getMuiTheme({
   palette: {
@@ -86,7 +85,7 @@ class LoginForm extends Component {
 
             <MuiThemeProvider muiTheme={buttonTheme}>
               <div className='buttonRow'>
-                <RaisedButton ra label={'Primary'} primary={true} label={'Entrar'} style={style} onClick={this.handleLogin.bind(this)}/>
+                <RaisedButton primary={true} label={'Entrar'} style={style} onClick={this.handleLogin.bind(this)}/>
                 <Link to='/register'>
                   <RaisedButton label={'Cadastre-se'} style={style} />
                 </Link>
