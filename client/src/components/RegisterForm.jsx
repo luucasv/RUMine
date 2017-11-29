@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {orange400, orange700} from 'material-ui/styles/colors';
+import '../css/RegisterForm.css';
 
 const fieldTheme = getMuiTheme({
   palette: {
@@ -13,7 +14,7 @@ const fieldTheme = getMuiTheme({
   },
 
   inputColor: {
-    color: '#FFA726'
+    color: '#FFFFFF'
   }
 });
 
@@ -58,46 +59,52 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleRegister.bind(this)}>
-        <MuiThemeProvider muiTheme={fieldTheme}>
-        <div>
+      <div className='cadastropage'>
+        <div className='logoCadastro'></div>
+        <Form onSubmit={this.handleRegister.bind(this)}>
+          <MuiThemeProvider muiTheme={fieldTheme}>
+          <div className='usrInfo'>
+            <br />
+            <TextField
+              floatingLabelText={'Login'}
+              value={this.state.username}
+              floatingLabelStyle={fieldTheme.inputColor}
+              inputStyle={fieldTheme.inputColor}
+              onChange={this.handleUsernameChange.bind(this)}
+            />
+            <br />
+            <TextField
+              floatingLabelText={'Senha'}
+              value={this.state.password}
+              floatingLabelStyle={fieldTheme.inputColor}
+              inputStyle={fieldTheme.inputColor}
+              type={'password'}
+              onChange={this.handlePasswordChange.bind(this)}
+            />
+            <br />
+            <TextField
+              floatingLabelText={'E-mail'}
+              floatingLabelStyle={fieldTheme.inputColor}
+              inputStyle={fieldTheme.inputColor}
+              value={this.state.email}
+              onChange={this.handleEmailChange.bind(this)}
+            />
+            <br />
+            <TextField
+              floatingLabelText={'CPF'}
+              value={this.state.cpf}
+              floatingLabelStyle={fieldTheme.inputColor}
+              onChange={this.handleCpfChange.bind(this)}
+              inputStyle={fieldTheme.inputColor}
+            />
+            </div>
+          </MuiThemeProvider>
           <br />
-          <TextField
-            floatingLabelText={'Login'}
-            value={this.state.username}
-            floatingLabelStyle={fieldTheme.inputColor}
-            inputStyle={fieldTheme.inputColor}
-            onChange={this.handleUsernameChange.bind(this)}
-          />
-          <br />
-          <TextField
-            floatingLabelText={'Senha'}
-            value={this.state.password}
-            floatingLabelStyle={fieldTheme.inputColor}
-            inputStyle={fieldTheme.inputColor}
-            type={'password'}
-            onChange={this.handlePasswordChange.bind(this)}
-          />
-          <br />
-          <TextField
-            floatingLabelText={'E-mail'}
-            inputStyle={fieldTheme.inputColor}
-            floatingLabelStyle={fieldTheme.inputColor}
-            value={this.state.emai}
-            onChange={this.handleEmailChange.bind(this)}
-          />
-          <br />
-          <TextField
-            floatingLabelText={'CPF'}
-            value={this.state.cpf}
-            floatingLabelStyle={fieldTheme.inputColor}
-            onChange={this.handleCpfChange.bind(this)}
-          />
-          </div>
-        </MuiThemeProvider>
-        <br />
-        <RaisedButton label={'Cadastrar'} type='submit'/>
-      </Form>
+          <MuiThemeProvider muiTheme={fieldTheme}>
+            <RaisedButton primary={true} label={'Confirmar'} />
+          </MuiThemeProvider>
+        </Form>
+      </div>
     );
   }
 }
