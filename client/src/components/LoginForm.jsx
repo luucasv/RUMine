@@ -6,7 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AuthProvider from '../lib/AuthProvider';
-import {orange400, orange700} from 'material-ui/styles/colors';
+import {orange400, orange700, blue200} from 'material-ui/styles/colors';
 import '../css/LoginForm.css';
 
 const buttonTheme = getMuiTheme({
@@ -21,7 +21,7 @@ const fieldTheme = getMuiTheme({
   },
 
   inputColor: {
-    color: '#FFA726'
+    color: '#FFFFFF'
   }
 });
 

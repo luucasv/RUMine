@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import { Redirect, withRouter } from 'react-router-dom';
+import RegisterForm from '../components/RegisterForm';
 
 class Register extends Component {
 
@@ -11,8 +12,10 @@ class Register extends Component {
 
   render() {
     return (
-      <h1>eae</h1>
-    );
+      <div>
+        <RegisterForm />
+      </div>
+     );
   }
 }
 

@@ -1,0 +1,12 @@
+div.usrInfo {
+    margin-top: 0%
+}
+
+div.logoCadastro {
+    display:block;
+    content:url('../img/cadastrologo.png');
+    margin:auto;
+    margin-top: 35%;
+    width: 50%;
+    height: auto;
+}
