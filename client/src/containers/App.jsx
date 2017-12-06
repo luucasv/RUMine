@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Login from './Login'
-import Register from './Register'
+import Login from './Login';
+import Register from './Register';
 import Loading from '../components/Loading';
+import Profile from './Profile';
 
 class App extends Component {
 
@@ -29,8 +30,8 @@ class App extends Component {
             <Switch>
               <Route exact path='/' render={(props) => <Login {...props} />} />
               <Route exact path='/register' render={(props) => <Register {...props} />} />
-              {/*
               <Route exact path='/profile' render={(props) => <Profile {...props} />} />
+              {/*
               <Route exact path='/queue' render={(props) => <Queue {...props} />} />
               <Route exact path='/wallet' render={(props) => <Wallet {...props} />} />
               <Route exact path='/payment' render={(props) => <Payment {...props} />} />
