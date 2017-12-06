@@ -14,6 +14,7 @@ class Register extends Component {
     return (
       <div>
         <RegisterForm />
+        
       </div>
      );
   }

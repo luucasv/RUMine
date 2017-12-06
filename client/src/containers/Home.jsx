@@ -3,6 +3,8 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import {GridList, GridTile } from 'material-ui/GridList';
 import ProfileDrawer from '../components/ProfileDrawer.jsx';
+import QueueDrawer from '../components/QueueDrawer.jsx';
+import WalletButton from '../components/WalletButton.jsx';
 import '../css/ProfilePage.css';
 
 const styles = {
@@ -28,14 +30,16 @@ const styles = {
   }
 };
 
-class Profile extends Component {
+class Home extends Component {
   render() {
     return (
       <div>
         <ProfileDrawer/>
+        <QueueDrawer/>
+        <WalletButton/>
       </div>
     )
   }
 };
 
-export default Profile;
+export default Home;
