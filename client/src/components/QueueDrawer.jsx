@@ -10,7 +10,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { Avatar, Paper } from 'material-ui';
 import { Divider } from 'material-ui/Divider';
 import { ContentInbox } from 'material-ui/svg-icons';
-import '../css/ProfileDrawer.css';
+import '../css/QueueDrawer.css';
 
 const style = {
     height: 150,
@@ -35,7 +35,7 @@ const homeButtonStyle = {
   overflow: 'hidden',
 }
 
-export default class ProfileDrawer extends React.Component {
+export default class QueueDrawer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -50,9 +50,9 @@ export default class ProfileDrawer extends React.Component {
     return (
       <div>
         <div className='buttonProfile'>
-          <Paper zDepth={4} rounded={true} style={{display: 'inline-block', width: 130, height: 130}}>
+          <Paper zDepth={4} circle={true} style={{display: 'inline-block'}}>
             <div style={{backgroundColor:'orange'}}>
-              <img src="/img/editProfile.png" onClick={this.handleToggle} style={{width: 130, height: 130}}/>
+              <img src="/img/filatam.png" onClick={this.handleToggle} style={{marginTop: 5, width: 130, height: 130}}/>
             </div>
           </Paper>
         </div>
@@ -63,21 +63,25 @@ export default class ProfileDrawer extends React.Component {
           onRequestChange={(open) => this.setState({open})}
         >
             <AppBar 
-                title='Olá, [nome]!'
+                title='Estado da fila'
                 iconElementLeft={<IconButton onClick={this.handleClose}><NavigationClose /></IconButton>}
                 style={{ backgroundColor: orange400}}
             />
 
-            <Paper style={style} zDepth={2} circle={true}>
-                <img src="/img/pic.png" style={{width: '100%', height: 'auto'}}/>
+            <Paper style={{marginLeft:25, marginTop:30, width: 250, height: 160}}>
+              <div>
+                <img src="/img/flowqueue.png" onClick={this.handleToggle} style={{width: '100%', height: 'auto'}}/>
+              </div>
             </Paper>
 
             <Paper style={menuStyle} zDepth={2}>
                 <List style={{marginTop:'10%'}}>
-                    <ListItem primaryText="Saldo: R$[valor]" leftIcon={<img src="/img/credits.png"/>}/>
-                    <ListItem primaryText="Email: [email]" leftIcon={<img src="/img/email.png"/>}/>
+                    <ListItem primaryText="Tempo estimado: [x]" leftIcon={<img src="/img/relogio.png"/>}/>
+                    <ListItem primaryText="Tamanho da fila: [y]" leftIcon={<img src="/img/filatam.png"/>}/>
+                    <ListItem primaryText="Última atualização: [z]" leftIcon={<img src="/img/tick.png"/>}/>
                 </List>
             </Paper>
+
         </Drawer>
       </div>
     );

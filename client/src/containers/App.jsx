@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Loading from '../components/Loading';
-import Profile from './Profile';
+import Home from './Home';
 
 class App extends Component {
 
@@ -30,7 +30,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' render={(props) => <Login {...props} />} />
               <Route exact path='/register' render={(props) => <Register {...props} />} />
-              <Route exact path='/profile' render={(props) => <Profile {...props} />} />
+              <Route exact path='/home' render={(props) => <Home {...props} />} />
               {/*
               <Route exact path='/queue' render={(props) => <Queue {...props} />} />
               <Route exact path='/wallet' render={(props) => <Wallet {...props} />} />
