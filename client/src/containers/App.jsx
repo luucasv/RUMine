@@ -5,6 +5,7 @@ import Login from './Login';
 import Register from './Register';
 import Loading from '../components/Loading';
 import Home from './Home';
+import Buy from './Buy';
 
 class App extends Component {
 
@@ -23,7 +24,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className='whole-page'>
+      <div>
         <MuiThemeProvider>
           {(this.state.status === 'loading') ?
             <Loading /> :
@@ -31,11 +32,7 @@ class App extends Component {
               <Route exact path='/' render={(props) => <Login {...props} />} />
               <Route exact path='/register' render={(props) => <Register {...props} />} />
               <Route exact path='/home' render={(props) => <Home {...props} />} />
-              {/*
-              <Route exact path='/queue' render={(props) => <Queue {...props} />} />
-              <Route exact path='/wallet' render={(props) => <Wallet {...props} />} />
-              <Route exact path='/payment' render={(props) => <Payment {...props} />} />
-              */}
+              <Route exact path='/buy'  render={(props) => <Buy {...props} />} />]
             </Switch>
           }
         </MuiThemeProvider>

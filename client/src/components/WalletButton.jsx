@@ -10,21 +10,6 @@ import FlatButton from 'material-ui/FlatButton';
 import { Avatar, Paper } from 'material-ui';
 import { Divider } from 'material-ui/Divider';
 import { ContentInbox } from 'material-ui/svg-icons';
-import '../css/WalletButton.css';
-
-const style = {
-    height: 150,
-    width: 150,
-    marginTop: '20%',
-    marginLeft: '24%',
-    textAlign: 'center',
-    display: 'inline-block',
-    overflow: 'hidden',
-};
-
-const menuStyle = {
-  marginTop: '20%',
-};
 
 const homeButtonStyle = {
   height: 100,
@@ -49,12 +34,12 @@ export default class WalletButton extends React.Component {
   render() {
     return (
       <div>
-        <div className='buttonProfile'>
-          <Paper zDepth={4} rounded={true} style={{display: 'inline-block', width: 130, height: 130}}>
+        <div>
+          <Paper zDepth={4} rounded={true} style={{width:'30%', height: '30%', textAlign:'center',margin:'auto'}}>
             <div style={{backgroundColor:'orange'}}>
               <a href="/payment">
-                <img src="/img/wallet.png" onClick={this.handleToggle} style={{width: 130, height: 130}}/>
-            </a>
+                <img src="/img/wallet.png" onClick={this.handleToggle} style={{margin: '5%', width: '80%'}} />
+              </a>
             </div>
           </Paper>
         </div>

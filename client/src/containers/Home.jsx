@@ -5,6 +5,7 @@ import {GridList, GridTile } from 'material-ui/GridList';
 import ProfileDrawer from '../components/ProfileDrawer.jsx';
 import QueueDrawer from '../components/QueueDrawer.jsx';
 import WalletButton from '../components/WalletButton.jsx';
+import Background from '../components/blurredRU.png';
 import '../css/ProfilePage.css';
 
 const styles = {
@@ -33,10 +34,19 @@ const styles = {
 class Home extends Component {
   render() {
     return (
-      <div>
-        <ProfileDrawer/>
-        <QueueDrawer/>
-        <WalletButton/>
+      <div style={{backgroundSize:'cover', backgroundImage: 'url(' + Background + ')', 
+          backgroundRepeat: 'no-repeat', width:'100%', height:'100%', position:'fixed', 
+          marginTop:'-2%', marginLeft:'-2%'}}>
+
+        <div style={{width:'100%', height:'30%'}}>
+          <ProfileDrawer/>
+        </div>
+        <div style={{width:'100%', height:'30%'}}>
+          <QueueDrawer/>
+        </div>
+        <div style={{width:'100%', height:'30%'}}>
+          <WalletButton/>
+        </div>
       </div>
     )
   }

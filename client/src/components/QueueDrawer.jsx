@@ -1,39 +1,12 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import {List, ListItem} from 'material-ui/List';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Paper } from 'material-ui';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import { orange400, grey300 } from 'material-ui/styles/colors';
+import { orange400 } from 'material-ui/styles/colors';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
-import { Avatar, Paper } from 'material-ui';
-import { Divider } from 'material-ui/Divider';
-import { ContentInbox } from 'material-ui/svg-icons';
-import '../css/QueueDrawer.css';
-
-const style = {
-    height: 150,
-    width: 150,
-    marginTop: '20%',
-    marginLeft: '24%',
-    textAlign: 'center',
-    display: 'inline-block',
-    overflow: 'hidden',
-};
-
-const menuStyle = {
-  marginTop: '20%',
-};
-
-const homeButtonStyle = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-  overflow: 'hidden',
-}
 
 export default class QueueDrawer extends React.Component {
 
@@ -49,17 +22,17 @@ export default class QueueDrawer extends React.Component {
   render() {
     return (
       <div>
-        <div className='buttonProfile'>
-          <Paper zDepth={4} circle={true} style={{display: 'inline-block'}}>
+        <div>
+          <Paper zDepth={4} rounded={true} style={{width:'30%', height: '30%', margin:'auto',textAlign:'center'}}>
             <div style={{backgroundColor:'orange'}}>
-              <img src="/img/filatam.png" onClick={this.handleToggle} style={{marginTop: 5, width: 130, height: 130}}/>
+              <img src="/img/filatam.png" style={{margin: '5%', width: '80%'}} onClick={this.handleToggle}/>
             </div>
           </Paper>
         </div>
         <Drawer
           docked={false}
-          width={'60%'}
           open={this.state.open}
+          width={'90%'}
           onRequestChange={(open) => this.setState({open})}
         >
             <AppBar 
@@ -68,14 +41,14 @@ export default class QueueDrawer extends React.Component {
                 style={{ backgroundColor: orange400}}
             />
 
-            <Paper style={{marginLeft:25, marginTop:30, width: 250, height: 160}}>
-              <div>
-                <img src="/img/flowqueue.png" onClick={this.handleToggle} style={{width: '100%', height: 'auto'}}/>
+            <Paper style={{width: '80%', height: 'auto', margin:'auto', marginTop:'20%', textAlign:'center'}}>
+              <div style={{width:'80%', height:'80%'}}>
+                <img src="/img/flowqueue.png" style={{width: '100%', height: 'auto'}}/>
               </div>
             </Paper>
 
-            <Paper style={menuStyle} zDepth={2}>
-                <List style={{marginTop:'10%'}}>
+            <Paper style={{marginTop:'20%'}} zDepth={2}>
+                <List>
                     <ListItem primaryText="Tempo estimado: [x]" leftIcon={<img src="/img/relogio.png"/>}/>
                     <ListItem primaryText="Tamanho da fila: [y]" leftIcon={<img src="/img/filatam.png"/>}/>
                     <ListItem primaryText="Última atualização: [z]" leftIcon={<img src="/img/tick.png"/>}/>

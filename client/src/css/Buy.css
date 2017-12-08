@@ -1,0 +1,8 @@
+.logoCompra {
+    display:block;
+    content:url('/img/buylogo.png');
+    margin:auto;
+    margin-top: 35%;
+    width: 50%;
+    height: auto;
+}
