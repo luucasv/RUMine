@@ -35,9 +35,12 @@ export default class WalletButton extends React.Component {
     return (
       <div>
         <div>
-          <Paper zDepth={4} rounded={true} style={{width:'30%', height: '30%', textAlign:'center',margin:'auto'}}>
+        {/* Tranfere para a pagina de compras */}
+          <Paper zDepth={4} rounded={true} 
+                 style={{width:'30%', height: '30%', 
+                 textAlign:'center',margin:'auto'}}>
             <div style={{backgroundColor:'orange'}}>
-              <a href="/payment">
+              <a href="/buy">
                 <img src="/img/wallet.png" onClick={this.handleToggle} style={{margin: '5%', width: '80%'}} />
               </a>
             </div>

@@ -6,22 +6,13 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AuthProvider from '../lib/AuthProvider';
-import {orange400, orange700, blue200} from 'material-ui/styles/colors';
+import { orange400 } from 'material-ui/styles/colors';
+
 import '../css/LoginForm.css';
 
-const buttonTheme = getMuiTheme({
+const orangeTheme = getMuiTheme({
   palette: {
     primary1Color: orange400
-  }
-});
-
-const fieldTheme = getMuiTheme({
-  palette: {
-    primary1Color: orange400
-  },
-
-  inputColor: {
-    color: '#FFFFFF'
   }
 });
 
@@ -59,22 +50,25 @@ class LoginForm extends Component {
     return (
       <div className='whole-page'>
           <Form>
+            {/* Logo do aplicativo */}
             <div className='logo-img'></div>
-            <MuiThemeProvider muiTheme={fieldTheme}>
+
+            {/* Campos de preenchimento */}
+            <MuiThemeProvider muiTheme={orangeTheme}>
               <div className='fields'>
                 <br />
                 <TextField 
                   floatingLabelText={'Login'}
-                  floatingLabelStyle={fieldTheme.inputColor}
-                  inputStyle={fieldTheme.inputColor}
+                  floatingLabelStyle={{color: 'white'}}
+                  inputStyle={{color: 'white'}}
                   value={this.state.username}
                   onChange={this.handleUsernameChange.bind(this)}
                 />
                 <br />
                 <TextField
                   floatingLabelText={'Senha'}
-                  floatingLabelStyle={fieldTheme.inputColor}
-                  inputStyle={fieldTheme.inputColor}
+                  floatingLabelStyle={{color: 'white'}}
+                  inputStyle={{color: 'white'}}
                   value={this.state.password}
                   type={'password'}
                   onChange={this.handlePasswordChange.bind(this)}
@@ -83,11 +77,12 @@ class LoginForm extends Component {
               </div>
             </MuiThemeProvider>
 
-            <MuiThemeProvider muiTheme={buttonTheme}>
+            {/* Botões */}
+            <MuiThemeProvider muiTheme={orangeTheme}>
               <div className='buttonRow'>
-                <RaisedButton primary={true} label={'Entrar'} style={style} onClick={this.handleLogin.bind(this)}/>
+                <RaisedButton primary={true} label={'Entrar'} style={{margin: 8}} onClick={this.handleLogin.bind(this)}/>
                 <Link to='/register'>
-                  <RaisedButton label={'Cadastre-se'} style={style} />
+                  <RaisedButton label={'Cadastre-se'} />
                 </Link>
               </div>
             </MuiThemeProvider>
@@ -105,10 +100,5 @@ const Form = styled.form`
     justify-content: center;
     flex-flow: column;
 `;
-
-const style = {
-  margin: 8
-
-};
 
 export default LoginForm;
