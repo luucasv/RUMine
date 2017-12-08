@@ -1,10 +1,7 @@
 div.logo-img {
     display:block;
     content:url('/img/applogo.png');
-    margin:auto;
-    margin-top: 35%;
     width: 50%;
-    height: auto;
 }
 
 div.whole-page {

@@ -57,9 +57,9 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div className='homepage'>
-      <div className='logo-img'></div>
+      <div className='whole-page'>
           <Form>
+            <div className='logo-img'></div>
             <MuiThemeProvider muiTheme={fieldTheme}>
               <div className='fields'>
                 <br />
