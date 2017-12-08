@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {orange400, orange700} from 'material-ui/styles/colors';
 import '../css/RegisterForm.css';
+import '../css/LoginForm.css';
 
 const fieldTheme = getMuiTheme({
   palette: {
@@ -59,9 +60,9 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <div className='cadastropage'>
-        <div className='logoCadastro'></div>
+      <div className='whole-page'>
         <Form onSubmit={this.handleRegister.bind(this)}>
+          <div className='logoCadastro'></div>
           <MuiThemeProvider muiTheme={fieldTheme}>
           <div className='usrInfo'>
             <br />
