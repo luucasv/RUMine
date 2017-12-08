@@ -3,6 +3,14 @@ div.logo-img {
     content:url('/img/applogo.png');
     width: 50%;
 }
+div.logo-img2 {
+    display:block;
+    content:url('/img/comprarlogo.png');
+    width: 50%;
+    margin: auto;
+    margin-top: 20%;
+    text-align:center;
+}
 
 div.whole-page {
     position: absolute; top: 0; left: 0; height: 100%; width: 100%;

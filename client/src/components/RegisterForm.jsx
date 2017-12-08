@@ -5,17 +5,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {orange400, orange700} from 'material-ui/styles/colors';
+import { orange400 } from 'material-ui/styles/colors';
+
 import '../css/RegisterForm.css';
 import '../css/LoginForm.css';
 
-const fieldTheme = getMuiTheme({
+const orangeTheme = getMuiTheme({
   palette: {
     primary1Color: orange400
-  },
-
-  inputColor: {
-    color: '#FFFFFF'
   }
 });
 
@@ -62,47 +59,58 @@ class RegisterForm extends Component {
     return (
       <div className='whole-page'>
         <Form onSubmit={this.handleRegister.bind(this)}>
+          {/* Logo da pagina de cadastro */}
           <div className='logoCadastro'></div>
-          <MuiThemeProvider muiTheme={fieldTheme}>
-          <div className='usrInfo'>
-            <br />
-            <TextField
-              floatingLabelText={'Login'}
-              value={this.state.username}
-              floatingLabelStyle={fieldTheme.inputColor}
-              inputStyle={fieldTheme.inputColor}
-              onChange={this.handleUsernameChange.bind(this)}
-            />
-            <br />
-            <TextField
-              floatingLabelText={'Senha'}
-              value={this.state.password}
-              floatingLabelStyle={fieldTheme.inputColor}
-              inputStyle={fieldTheme.inputColor}
-              type={'password'}
-              onChange={this.handlePasswordChange.bind(this)}
-            />
-            <br />
-            <TextField
-              floatingLabelText={'E-mail'}
-              floatingLabelStyle={fieldTheme.inputColor}
-              inputStyle={fieldTheme.inputColor}
-              value={this.state.email}
-              onChange={this.handleEmailChange.bind(this)}
-            />
-            <br />
-            <TextField
-              floatingLabelText={'CPF'}
-              value={this.state.cpf}
-              floatingLabelStyle={fieldTheme.inputColor}
-              onChange={this.handleCpfChange.bind(this)}
-              inputStyle={fieldTheme.inputColor}
-            />
+
+          {/* Campos de preenchimento */}
+          <MuiThemeProvider muiTheme={orangeTheme}>
+            <div>
+              <br />
+              <TextField
+                floatingLabelText={'Login'}
+                value={this.state.username}
+                floatingLabelStyle={{color: 'white'}}
+                inputStyle={{color: 'white'}}
+                onChange={this.handleUsernameChange.bind(this)}
+              />
+              <br />
+              <TextField
+                floatingLabelText={'Senha'}
+                value={this.state.password}
+                floatingLabelStyle={{color: 'white'}}
+                inputStyle={{color: 'white'}}
+                type={'password'}
+                onChange={this.handlePasswordChange.bind(this)}
+              />
+              <br />
+              <TextField
+                floatingLabelText={'E-mail'}
+                floatingLabelStyle={{color: 'white'}}
+                inputStyle={{color: 'white'}}
+                value={this.state.email}
+                onChange={this.handleEmailChange.bind(this)}
+              />
+              <br />
+              <TextField
+                floatingLabelText={'CPF'}
+                value={this.state.cpf}
+                floatingLabelStyle={{color: 'white'}}
+                onChange={this.handleCpfChange.bind(this)}
+                inputStyle={{color: 'white'}}
+              />
+              <br/>
             </div>
           </MuiThemeProvider>
-          <br />
-          <MuiThemeProvider muiTheme={fieldTheme}>
-            <RaisedButton primary={true} label={'Confirmar'} />
+
+          {/* Botoes */}
+          <MuiThemeProvider muiTheme={orangeTheme}>
+            <div className='buttonRow'>
+              <RaisedButton primary={true} 
+                            label={'Cadastrar'} style={{margin: 8}}/>
+              <Link to='/'>
+                <RaisedButton label={'Voltar'} />
+              </Link>
+            </div>
           </MuiThemeProvider>
         </Form>
       </div>
