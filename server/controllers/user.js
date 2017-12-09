@@ -71,3 +71,11 @@ export const changeBalance = async (username, amount) => {
     return { success: false, msg: 'Insufficient balance.' };
   }
 }
+
+export const getInfo = async (username) => {
+  let user = await findUserByUsername(username);
+  return {
+    email: user.email,
+    balance: user.balance
+  };
+}

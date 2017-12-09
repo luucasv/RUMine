@@ -7,12 +7,50 @@ import IconButton from 'material-ui/IconButton';
 import { orange400 } from 'material-ui/styles/colors';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
+import AuthProvider from '../stores/AuthProvider';
 
 export default class QueueDrawer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    let info = AuthProvider.getQueueInfo();
+    if (!info) {
+      info = {size: '--', time: '--'};
+    }
+    this.state = {
+      open: false,
+      queue_info: info
+    };
+  }
+
+  componentWillMount() {
+    AuthProvider.on('change', () => {
+      let info =  AuthProvider.getQueueInfo();
+      if (info) {
+        this.setState({
+          queue_info: AuthProvider.getQueueInfo()
+        });
+      }
+    });
+  }
+
+  formatDate = () => {
+    let date = this.state.queue_info.time;
+    if (date == '--') {
+      return '--';
+    }
+    date = new Date(date);
+    let leading_zeros = (num) => {
+      let a = parseInt(num / 10);
+      let b = parseInt(num % 10);
+      return a + '' + b;
+    };
+    let day = leading_zeros(date.getDay());
+    let month = leading_zeros(date.getMonth());
+    let year = date.getFullYear();
+    let hour = leading_zeros(date.getHours());
+    let min  = leading_zeros(date.getMinutes());
+    return hour + ':' + min + ' - '+ day + '/' + month + '/' + year;
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -68,9 +106,9 @@ export default class QueueDrawer extends React.Component {
                 <List>
                     <ListItem primaryText="Tempo estimado: [x]" 
                               leftIcon={<img src="/img/relogio.png"/>}/>
-                    <ListItem primaryText="Tamanho da fila: [y]" 
+                    <ListItem primaryText={'Tamanho da fila: ' + this.state.queue_info.size} 
                               leftIcon={<img src="/img/filatam.png"/>}/>
-                    <ListItem primaryText="Última atualização: [z]" 
+                    <ListItem primaryText={'Última atualização: ' +  this.formatDate()}
                               leftIcon={<img src="/img/tick.png"/>}/>
                 </List>
             </Paper>

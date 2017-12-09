@@ -5,8 +5,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import AuthProvider from '../lib/AuthProvider';
+import AuthProvider from '../stores/AuthProvider';
 import { orange400 } from 'material-ui/styles/colors';
+import Dialog from 'material-ui/Dialog';
 
 import '../css/LoginForm.css';
 
@@ -22,15 +23,23 @@ class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
-      ans: ''
+      open: false
     }
-    console.log('ans',this.state.ans)
   }
 
-  handleLogin() {
-    let ans = AuthProvider.login(this.state.login, this.state.password);
+  async handleLogin() {
+    let ans = await AuthProvider.authenticate(this.state.username, this.state.password);
+    if (!ans.success) {
+      this.setState({
+        password: '',
+        open: true
+      });
+    }
+  }
+
+  closeDialog() {
     this.setState({
-      ans
+        open: false
     });
   }
 
@@ -87,6 +96,13 @@ class LoginForm extends Component {
               </div>
             </MuiThemeProvider>
           </Form>
+          <Dialog
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.closeDialog.bind(this)}
+          >
+              Email e/ou Senha inválidos!
+          </Dialog>
       </div>
     );
   }
