@@ -6,6 +6,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { orange400 } from 'material-ui/styles/colors';
+import AuthProvider from '../stores/AuthProvider';
+import Dialog from 'material-ui/Dialog';
 
 import '../css/RegisterForm.css';
 import '../css/LoginForm.css';
@@ -23,12 +25,28 @@ class RegisterForm extends Component {
       username: '',
       password: '',
       cpf: '',
-      email: ''
+      email: '',
+      open: false,
+      msg: ''
     }
   }
 
-  handleRegister(event) {
-    console.log(event);
+  async handleRegister(event) {
+    const {username, password, cpf, email} = this.state;
+    let ans = await AuthProvider.register(username, password, email, cpf);
+    if (!ans.success) {
+      this.setState({
+        password: '',
+        open: true,
+        msg: ans.msg
+      })
+    }
+  }
+
+  closeDialog() {
+    this.setState({
+        open: false
+    });
   }
 
   handlePasswordChange(event) {
@@ -106,13 +124,20 @@ class RegisterForm extends Component {
           <MuiThemeProvider muiTheme={orangeTheme}>
             <div className='buttonRow'>
               <RaisedButton primary={true} 
-                            label={'Cadastrar'} style={{margin: 8}}/>
+                            label={'Cadastrar'} style={{margin: 8}} onClick={this.handleRegister.bind(this)}/>
               <Link to='/'>
                 <RaisedButton label={'Voltar'} />
               </Link>
             </div>
           </MuiThemeProvider>
         </Form>
+        <Dialog
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.closeDialog.bind(this)}
+        >
+          {this.state.msg}
+        </Dialog>
       </div>
     );
   }

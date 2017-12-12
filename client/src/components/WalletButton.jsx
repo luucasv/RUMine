@@ -40,9 +40,7 @@ export default class WalletButton extends React.Component {
                  style={{width:'30%', height: '30%', 
                  textAlign:'center',margin:'auto'}}>
             <div style={{backgroundColor:'orange'}}>
-              <a href="/buy">
-                <img src="/img/wallet.png" onClick={this.handleToggle} style={{margin: '5%', width: '80%'}} />
-              </a>
+              <img src="/img/wallet.png" onClick={this.handleToggle} style={{margin: '5%', width: '80%'}} />
             </div>
           </Paper>
         </div>

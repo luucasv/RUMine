@@ -5,6 +5,7 @@ import {GridList, GridTile } from 'material-ui/GridList';
 import ProfileDrawer from '../components/ProfileDrawer.jsx';
 import QueueDrawer from '../components/QueueDrawer.jsx';
 import WalletButton from '../components/WalletButton.jsx';
+import { Link } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -23,7 +24,9 @@ class Home extends Component {
         </div>
 
         <div style={{width:'100%', height:'30%'}}>
-          <WalletButton/>
+          <Link to='/buy' >
+            <WalletButton/>
+          </Link>
         </div>
       </div>
     )

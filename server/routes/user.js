@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getBalance, changeBalance, checkPassword } from '../controllers/user';
+import { createUser, getBalance, changeBalance, checkPassword, getInfo } from '../controllers/user';
 import { authenticate, validateToken } from '../controllers/auth';
 import { processEntry } from "../controllers/turnstile_log";
 
@@ -9,18 +9,33 @@ const userRouter = express.Router();
 
 // register user
 userRouter.post('/register', async (req, res) => {
-  const {username, password, email, cpf} = req.body;
-  if (!username || !password || !email || !cpf) {
-    return res.json({ 
+  const { username, password, email, cpf } = req.body;
+  if (!username) {
+    return res.json({
       success: false,
-      msg: 'Missing something'
+      msg: 'Missing username'
+    });
+  } else if (!password) {
+    return res.json({
+      success: false,
+      msg: 'Missing password'
+    });
+  } else if (!email) {
+    return res.json({
+      success: false,
+      msg: 'Missing email'
+    });
+  } else if (!cpf) {
+    return res.json({
+      success: false,
+      msg: 'Missing cpf'
     });
   }
   let user = {
     username: username,
     password: password,
-    email:    email,
-    cpf:      cpf
+    email: email,
+    cpf: cpf
   };
   let ans = await createUser(user);
   return res.json(ans);
@@ -28,11 +43,16 @@ userRouter.post('/register', async (req, res) => {
 
 // get token
 userRouter.post('/auth', async (req, res) => {
-  const {username, password} = req.body;
-  if (!username || !password) {
+  const { username, password } = req.body;
+  if (!username) {
     return res.json({
       success: false,
-      msg: 'Missing username or password'
+      msg: 'Missing username'
+    });
+  } else if (!password) {
+    return res.json({
+      success: false,
+      msg: 'Missing password'
     });
   }
   let ans = await authenticate(username, password);
@@ -54,7 +74,7 @@ userRouter.post('/entry', async (req, res) => {
       msg: 'Invalid username or password'
     });
   } else {
-    return res.json( await processEntry(username) );
+    return res.json(await processEntry(username));
   }
 });
 
@@ -78,12 +98,16 @@ userRouter.use(async (req, res, next) => {
 
 // get user balance
 userRouter.get('/balance', async (req, res) => {
-  res.json({success: true, balance: await getBalance(req.decode.username)});
+  res.json({ success: true, balance: await getBalance(req.decode.username) });
 });
 
 // update balance
 userRouter.put('/balance', async (req, res) => {
   res.json(await changeBalance(req.decode.username, req.body.amount));
+});
+
+userRouter.get('/info', async (req, res) => {
+  res.json({ success: true, info: await getInfo(req.decode.username) });
 });
 
 export default userRouter;

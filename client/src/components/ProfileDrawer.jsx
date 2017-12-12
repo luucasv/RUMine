@@ -8,17 +8,33 @@ import { orange400 } from 'material-ui/styles/colors';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
 import { Paper } from 'material-ui';
+import AuthProvider from '../stores/AuthProvider';
 
 export default class ProfileDrawer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    this.state = {
+      open: false,
+      username: AuthProvider.getUsername(),
+      balance: AuthProvider.getBalance(),
+      email: AuthProvider.getEmail()
+    };
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleClose = () => this.setState({open: false});
+
+  componentWillMount() {
+    AuthProvider.on('change', () => {
+      this.setState({
+        username: AuthProvider.getUsername(),
+        balance: AuthProvider.getBalance(),
+        email: AuthProvider.getEmail()
+      });
+    });
+  }
 
   render() {
     return (
@@ -47,7 +63,7 @@ export default class ProfileDrawer extends React.Component {
             onRequestChange={(open) => this.setState({open})}>
               {/* Barra laranja superior de saudaçao ao usuario */}
               <AppBar 
-                  title='Olá, [nome]!'
+                  title={'Olá, ' + this.state.username + '!'}
                   iconElementLeft={<IconButton onClick={this.handleClose}><NavigationClose /></IconButton>}
                   style={{ backgroundColor: orange400}}
               />
@@ -64,9 +80,9 @@ export default class ProfileDrawer extends React.Component {
               {/* Informaçoes do usuario */}
               <Paper style={{marginTop:'20%'}} zDepth={2}>
                   <List style={{marginTop:'10%'}}>
-                      <ListItem primaryText="Saldo: R$[valor]" 
+                      <ListItem primaryText={'Saldo: R$ ' + Number(this.state.balance).toFixed(2)} 
                                 leftIcon={<img src="/img/credits.png"/>}/>
-                      <ListItem primaryText="Email: [email]" 
+                      <ListItem primaryText={'Email: ' + this.state.email}  
                                 leftIcon={<img src="/img/email.png"/>}/>
                   </List>
               </Paper>
